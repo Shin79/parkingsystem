@@ -9,7 +9,7 @@ import com.parkit.parkingsystem.model.Ticket;
 public class FareCalculatorService {
 
     public void calculateFare(Ticket ticket){
-        if( (ticket.getOutTime() == null)){
+        if( (ticket.getOutTime() == null) || ticket.getOutTime().isBefore(ticket.getInTime()) ){
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
@@ -17,8 +17,8 @@ public class FareCalculatorService {
         LocalDateTime outHour = ticket.getOutTime();
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
-        long diffInOut = ChronoUnit.HOURS.between(inHour, outHour);
-        double duration = diffInOut;
+        long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour);
+        double duration = ((double)diffInOut / 60);
 
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
