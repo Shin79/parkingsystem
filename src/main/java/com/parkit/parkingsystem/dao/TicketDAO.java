@@ -57,8 +57,8 @@ public class TicketDAO {
                 ticket.setId(rs.getInt(2));
                 ticket.setVehicleRegNumber(vehicleRegNumber);
                 ticket.setPrice(rs.getDouble(3));
-                ticket.setInTime(rs.getTimestamp(4).toLocalDateTime());    //Conversion Timestamp -> LocalDateTime
-                ticket.setOutTime(rs.getTimestamp(5).toLocalDateTime());   //Conversion Timestamp -> LocalDateTime
+                ticket.setInTime(rs.getTimestamp(4).toLocalDateTime());                                       //Conversion Timestamp -> LocalDateTime
+                ticket.setOutTime((rs.getTimestamp(5) == null)?null: rs.getTimestamp(5).toLocalDateTime());   //Conversion Timestamp -> LocalDateTime
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
