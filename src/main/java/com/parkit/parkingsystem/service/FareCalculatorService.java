@@ -17,9 +17,12 @@ public class FareCalculatorService {
         LocalDateTime outHour = ticket.getOutTime();
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
-        long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour);
-        double duration = ((double)diffInOut / 60);
+        long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour);  // Calcul de la différence entre heure d'entrée et de sortie
+        double duration = ((double)diffInOut / 60);   				  //Transformation en heure 
 
+        if(duration <= Fare.FREE_HOURS) {                             // 30 premières minutes gratuites
+        	duration = Fare.FREE_PRICE;
+        } 
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
                 ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
