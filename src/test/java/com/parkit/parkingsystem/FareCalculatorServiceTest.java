@@ -10,6 +10,7 @@ import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.FareCalculatorService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,6 +60,7 @@ public class FareCalculatorServiceTest {
     }
 
     @Test
+    @Tag("TestsException")
     public void calculateFareUnkownType(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,10,05,32);
         //inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
@@ -72,6 +74,7 @@ public class FareCalculatorServiceTest {
     }
 
     @Test
+    @Tag("TestsException")
     public void calculateFareBikeWithFutureInTime(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
         //inTime.setTime( System.currentTimeMillis() + (  60 * 60 * 1000) );
@@ -126,6 +129,7 @@ public class FareCalculatorServiceTest {
         assertEquals( (24 * Fare.CAR_RATE_PER_HOUR) , ticket.getPrice());
     }
     @Test
+    @Tag("TrentePrenièresMinutesGratuites")
     public void calculateFareBikeWithLFirstThirtyMinutesFree(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,35,32);
@@ -138,6 +142,7 @@ public class FareCalculatorServiceTest {
         assertEquals(Fare.FREE_PRICE, ticket.getPrice() );
     }
     @Test
+    @Tag("TrentePremièresMinutesGratuites")
     public void calculateFareCarWithLFirstThirtyMinutesFree(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,35,32);
