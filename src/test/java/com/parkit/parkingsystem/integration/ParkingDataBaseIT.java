@@ -61,7 +61,6 @@ public class ParkingDataBaseIT {
         try {
         	Ticket ticket = ticketDAO.getTicket("ABCDEF");
         	assertNotNull(ticket);
-        	assertNotEquals(1,parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR));
         	assertEquals(2,parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR));
         } catch (Exception e){
         	e.printStackTrace();
@@ -73,7 +72,15 @@ public class ParkingDataBaseIT {
         testParkingACar();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
-        //TODO: check that the fare generated and out time are populated correctly in the database
+        //check that the fare generated and out time are populated correctly in the database
+        try {
+        	Ticket ticket = ticketDAO.getTicket("ABCDEF");
+        	assertNotNull(ticket.getPrice());
+        	assertNotNull(ticket.getOutTime());
+        	assertEquals(1,parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR));
+        } catch(Exception e) {
+        	e.printStackTrace();
+        }
     }    
 
 }
