@@ -154,4 +154,30 @@ public class FareCalculatorServiceTest {
         fareCalculatorService.calculateFare(ticket);
         assertEquals(Fare.FREE_PRICE, ticket.getPrice() );
     }
+    @Test
+    @Tag("RabaisUtilisateursRécurrents")
+    public void calculateFareCarWithReccurentUser() {
+    	LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
+        LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,19,05,32);
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
+        
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(Fare.CAR_RATE_PER_HOUR -(Fare.CAR_RATE_PER_HOUR * Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
+    }
+    @Test
+    @Tag("RabaisUtilisateursRécurrents")
+    public void calculateFareBikeWithRecurrentUser() {
+    	LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
+        LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,19,05,32);
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
+        
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(Fare.BIKE_RATE_PER_HOUR -(Fare.BIKE_RATE_PER_HOUR * Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
+    }
 }
