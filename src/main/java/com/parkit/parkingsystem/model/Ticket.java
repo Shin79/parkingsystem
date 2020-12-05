@@ -9,14 +9,7 @@ public class Ticket {
     private double price;
     private LocalDateTime inTime;
     private LocalDateTime outTime;
-    private Boolean hasDiscount;
     
-    public boolean getHasDiscount() {
-    	return hasDiscount;
-    }
-    public void setHasDiscount(boolean newHasDiscount) {
-    	this.hasDiscount = newHasDiscount;
-    }
     public int getId() {
         return id;
     }
