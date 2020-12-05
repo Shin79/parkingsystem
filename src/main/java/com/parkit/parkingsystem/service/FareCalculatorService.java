@@ -8,21 +8,23 @@ import com.parkit.parkingsystem.model.Ticket;
 
 public class FareCalculatorService {
 
-    public void calculateFare(Ticket ticket){
+    public void calculateFare(Ticket ticket, boolean recurringUser){
         if( (ticket.getOutTime() == null) || ticket.getOutTime().isBefore(ticket.getInTime()) ){
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
         LocalDateTime inHour = ticket.getInTime();
         LocalDateTime outHour = ticket.getOutTime();
-
-        //TODO: Some tests are failing here. Need to check if this logic is correct
+                        
         long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour);  // Calcul de la différence entre heure d'entrée et de sortie
         double duration = ((double)diffInOut / 60);   				  //Transformation en heure 
-
+        
         if(duration <= Fare.FREE_HOURS) {                             // 30 premières minutes gratuites
         	duration = Fare.FREE_PRICE;
         } 
+        if(recurringUser) {                                               // Si utilisateur récurrent, calcul du  nouveau tarif
+        	duration *= (1 - Fare.DISCOUNT_PERCENTAGE);
+        }
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
                 ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
@@ -35,4 +37,5 @@ public class FareCalculatorService {
             default: throw new IllegalArgumentException("Unkown Parking Type");
         }
     }
+
 }
