@@ -41,9 +41,6 @@ public class ParkingService {
                 //ticket.setId(ticketID);
                 if(ticketDAO.isRecurringUser(vehicleRegNumber)) {
                 	System.out.println("Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
-                	ticket.setHasDiscount(true);
-                } else {
-                	ticket.setHasDiscount(false);
                 }
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
