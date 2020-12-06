@@ -165,7 +165,7 @@ public class FareCalculatorServiceTest {
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket, true);
-        assertEquals(Fare.CAR_RATE_PER_HOUR -(Fare.CAR_RATE_PER_HOUR * Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
+        assertEquals( Fare.CAR_RATE_PER_HOUR * (1 - Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
     }
     @Test
     @Tag("RabaisUtilisateursRécurrents")
@@ -178,6 +178,6 @@ public class FareCalculatorServiceTest {
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket, true);
-        assertEquals(Fare.BIKE_RATE_PER_HOUR -(Fare.BIKE_RATE_PER_HOUR * Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
+        assertEquals( Fare.BIKE_RATE_PER_HOUR -(Fare.BIKE_RATE_PER_HOUR * Fare.DISCOUNT_PERCENTAGE),ticket.getPrice());
     }
 }
