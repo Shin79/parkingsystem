@@ -1,5 +1,6 @@
 package com.parkit.parkingsystem.model;
 
+
 import java.time.LocalDateTime;
 
 public class Ticket {
@@ -35,7 +36,7 @@ public class Ticket {
     }
 
     public double getPrice() {
-        return price;
+    	return price;
     }
 
     public void setPrice(double price) {
