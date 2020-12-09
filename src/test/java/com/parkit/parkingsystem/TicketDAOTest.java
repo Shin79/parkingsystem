@@ -1,5 +1,6 @@
 package com.parkit.parkingsystem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
 
@@ -34,5 +35,14 @@ public class TicketDAOTest{
 		boolean isFalse = ticketDAO.saveTicket(ticket);
 		assertEquals(isFalse,Boolean.FALSE);
 		
+	}
+	@Test
+	public void getTicketTest() {
+		String vehicleRegNumber = "ABCDEF";
+		Ticket ticket = ticketDAO.getTicket(vehicleRegNumber);
+		assertNotNull(ticket.getId());
+		assertNotNull(ticket.getInTime());
+		assertNotNull(ticket.getParkingSpot());
+		assertNotNull(ticket.getVehicleRegNumber());
 	}
 }
