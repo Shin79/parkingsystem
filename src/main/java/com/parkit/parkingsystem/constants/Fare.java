@@ -5,5 +5,5 @@ public class Fare {
     public static final double CAR_RATE_PER_HOUR = 1.5;
     public static final double FREE_HOURS = 0.5;
     public static final int FREE_PRICE = 0;
-    public static final double DISCOUNT_PERCENTAGE = 0.05;
+    public static final double DISCOUNT_RATE = 0.95;
 }

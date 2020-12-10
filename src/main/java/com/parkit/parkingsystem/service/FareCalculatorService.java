@@ -23,7 +23,7 @@ public class FareCalculatorService {
         	duration = Fare.FREE_PRICE;
         } 
         if(recurringUser) {                                               // Si utilisateur récurrent, calcul du  nouveau tarif
-        	duration *= (1 - Fare.DISCOUNT_PERCENTAGE) ;
+        	duration *= Fare.DISCOUNT_RATE;
         }
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
