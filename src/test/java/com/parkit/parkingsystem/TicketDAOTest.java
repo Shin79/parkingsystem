@@ -26,13 +26,16 @@ public class TicketDAOTest{
 	@Test
 	public void saveTicketTest() {
 		Ticket ticket = new Ticket();
-		ParkingSpot parkingSpot = new ParkingSpot(1,ParkingType.CAR,false);
+		ParkingSpot parkingSpot = new ParkingSpot(1,ParkingType.CAR,true);
 		ticket.setParkingSpot(parkingSpot);
 		ticket.setVehicleRegNumber("ABCDEF");
-		ticket.setPrice(Fare.CAR_RATE_PER_HOUR);
-		LocalDateTime inTime = LocalDateTime.now();
+		ticket.setPrice(0);
+		LocalDateTime inTime = LocalDateTime.now().minusHours(1);
 		ticket.setInTime(inTime);
+		LocalDateTime outTime = LocalDateTime.now();
+		ticket.setOutTime(outTime);
 		boolean isFalse = ticketDAO.saveTicket(ticket);
+		System.out.println(isFalse);
 		assertEquals(isFalse,Boolean.FALSE);
 		
 	}
