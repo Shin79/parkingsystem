@@ -36,9 +36,8 @@ public class TicketDAO {
             logger.error("Error fetching next available slot",ex);
         }finally {
             dataBaseConfig.closeConnection(con);
-            
         }
-        return false;   //return hors du bloc finally
+        return false;//return hors du bloc finally
     }
 
     public Ticket getTicket(String vehicleRegNumber) {
@@ -96,7 +95,7 @@ public class TicketDAO {
     		PreparedStatement ps = con.prepareStatement(DBConstants.GET_COUNT);
     		ps.setString(1,vehicleRegNumber);
     		ResultSet rs = ps.executeQuery();
-    		if(rs.getInt(1)>1) {
+    		if(rs.next() && rs.getInt(1)>1) {
     			return true;
     		}
     	}catch (Exception ex){
