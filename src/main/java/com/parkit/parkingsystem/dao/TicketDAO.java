@@ -37,7 +37,7 @@ public class TicketDAO {
         }finally {
             dataBaseConfig.closeConnection(con);
         }
-        return false;//return hors du bloc finally
+        return false;																						//return hors du bloc finally
     }
 
     public Ticket getTicket(String vehicleRegNumber) {
@@ -67,7 +67,7 @@ public class TicketDAO {
             dataBaseConfig.closeConnection(con);
             
         }
-        return ticket;    //return hors du bloc finally pour ne pas avoir le ticket en cas d'exception
+        return ticket;    																			//return hors du bloc finally pour ne pas avoir le ticket en cas d'exception
     }
 
     public boolean updateTicket(Ticket ticket) {

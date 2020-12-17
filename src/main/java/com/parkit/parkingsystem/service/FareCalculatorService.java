@@ -16,11 +16,11 @@ public class FareCalculatorService {
 		LocalDateTime inHour = ticket.getInTime();
 		LocalDateTime outHour = ticket.getOutTime();
 
-		long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour); // Calcul de la différence entre heure d'entrée et
-																		// de sortie
-		double duration = ((double) diffInOut / 60); // Transformation en heure
+		long diffInOut = ChronoUnit.MINUTES.between(inHour, outHour); 	// Calcul de la différence entre heure d'entrée et
+																		// de sortie avec ChronoUnit en minutes
+		double duration = ((double) diffInOut / 60); 					// Conversion en heure
 
-		if (duration <= Fare.FREE_HOURS) { // 30 premières minutes gratuites
+		if (duration <= Fare.FREE_HOURS) { 								// 30 premières minutes gratuites
 			ticket.setPrice(Fare.FREE_PRICE);
 		} else {
 			double factor = recurringUser ? Fare.DISCOUNT_RATE : 1.0;

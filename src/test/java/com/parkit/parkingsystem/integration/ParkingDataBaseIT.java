@@ -62,6 +62,7 @@ public class ParkingDataBaseIT {
         try {
         	Ticket ticket = ticketDAO.getTicket("ABCDEF");
         	assertNotNull(ticket);
+        	assertNotNull(ticket);
         	assertEquals(2,parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR));
         } catch (Exception e){
         	e.printStackTrace();

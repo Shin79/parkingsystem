@@ -33,13 +33,13 @@ public class ParkingService {
             if(parkingSpot !=null && parkingSpot.getId() > 0){
                 String vehicleRegNumber = getVehichleRegNumber();
                 parkingSpot.setAvailable(false);
-                parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark it's availability as false
+                parkingSpotDAO.updateParking(parkingSpot);
 
-                LocalDateTime inTime = LocalDateTime.now();
+                LocalDateTime inTime = LocalDateTime.now();													// Utilisation de la méthode LocalDateTime.now()
                 Ticket ticket = new Ticket();
                 //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
                 //ticket.setId(ticketID);
-                if(ticketDAO.isRecurringUser(vehicleRegNumber)) {
+                if(ticketDAO.isRecurringUser(vehicleRegNumber)) {									       // Message de bienvenue pour les utilisateurs récurrents
                 	System.out.println("Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
                 }
                 ticket.setParkingSpot(parkingSpot);

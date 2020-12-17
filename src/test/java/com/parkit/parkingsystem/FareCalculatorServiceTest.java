@@ -33,7 +33,7 @@ public class FareCalculatorServiceTest {
 
     @Test
     public void calculateFareCar(){
-        LocalDateTime inTime = LocalDateTime.of(2019, Month.DECEMBER,01,10,05,32);
+        LocalDateTime inTime = LocalDateTime.of(2019, Month.DECEMBER,01,10,05,32);      // Remplacement de la méthode Date.setTime() par LocalDateTime.of()
         // inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,11,05,32);
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
@@ -90,7 +90,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareBikeWithLessThanOneHourParkingTime(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
-        //inTime.setTime( System.currentTimeMillis() - (  45 * 60 * 1000) );//45 minutes parking time should give 3/4th parking fare
+        //inTime.setTime( System.currentTimeMillis() - (  45 * 60 * 1000) );
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,50,32);
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
 
@@ -104,7 +104,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithLessThanOneHourParkingTime(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,05,32);
-        //inTime.setTime( System.currentTimeMillis() - (  45 * 60 * 1000) );//45 minutes parking time should give 3/4th parking fare
+        //inTime.setTime( System.currentTimeMillis() - (  45 * 60 * 1000) );			
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,50,32);
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
 
@@ -118,7 +118,7 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithMoreThanADayParkingTime(){
         LocalDateTime inTime = LocalDateTime.of(2019,Month.DECEMBER,01,18,45,32);
-        //inTime.setTime( System.currentTimeMillis() - (  24 * 60 * 60 * 1000) );//24 hours parking time should give 24 * parking fare per hour
+        //inTime.setTime( System.currentTimeMillis() - (  24 * 60 * 60 * 1000) );		
         LocalDateTime outTime = LocalDateTime.of(2019,Month.DECEMBER,02,18,45,32);
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
 
