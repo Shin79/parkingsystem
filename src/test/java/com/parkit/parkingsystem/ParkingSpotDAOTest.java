@@ -6,19 +6,23 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.parkit.parkingsystem.config.DataBaseConfig;
 import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.dao.ParkingSpotDAO;
+import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 
 public class ParkingSpotDAOTest{
-	private static DataBaseConfig dataBaseConfigTest = new DataBaseConfig();
+	private static DataBaseTestConfig dataBaseConfigTest = new DataBaseTestConfig();
 	private static ParkingSpotDAO parkingSpotDAO;
+	private static DataBasePrepareService dataBasePrepareService;
 	
 	@BeforeAll
 	public static void setUp() throws Exception{
 		parkingSpotDAO = new ParkingSpotDAO();
 		parkingSpotDAO.dataBaseConfig = dataBaseConfigTest;
+		dataBasePrepareService = new DataBasePrepareService();
+		dataBasePrepareService.clearDataBaseEntries();
 				
 	}
 

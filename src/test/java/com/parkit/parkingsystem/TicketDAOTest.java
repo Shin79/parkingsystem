@@ -12,17 +12,21 @@ import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.dao.TicketDAO;
 import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
+import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
 public class TicketDAOTest{
 	private static DataBaseTestConfig dataBaseTestConfig = new DataBaseTestConfig();
 	private static TicketDAO ticketDAO;
+	private static DataBasePrepareService dataBasePrepareService;
 	
 	@BeforeAll
 	public static void setUp() throws Exception{
 		ticketDAO = new TicketDAO();
 		ticketDAO.dataBaseConfig = dataBaseTestConfig;
+		dataBasePrepareService = new DataBasePrepareService();
+		dataBasePrepareService.clearDataBaseEntries();
 	}
 	@Test
 	public void saveTicketTest() {
@@ -62,6 +66,15 @@ public class TicketDAOTest{
 	public void isRecurringUserTest() {
 		Ticket ticket = new Ticket();
 		ticket.setVehicleRegNumber("ABCDEF");
+		ParkingSpot parkingSpot = new ParkingSpot(1,ParkingType.CAR,true);
+		ticket.setParkingSpot(parkingSpot);
+		ticket.setPrice(0);
+		LocalDateTime inTime = LocalDateTime.now().minusHours(1);
+		ticket.setInTime(inTime);
+		LocalDateTime outTime = LocalDateTime.now();
+		ticket.setOutTime(outTime);
+		ticketDAO.saveTicket(ticket);
+		ticketDAO.saveTicket(ticket);
 		boolean isTrue = ticketDAO.isRecurringUser(ticket.getVehicleRegNumber());
 		assertTrue(isTrue);
 	}
